@@ -7,7 +7,7 @@ async function Home() {
   const user = await currentUser();
   if (!user) return null;
 
-  const result = await fetchPosts(1, 30);
+  const result = await fetchPosts({ pageNumber: 1, pageSize: 30 });
 
   return (
     <>
