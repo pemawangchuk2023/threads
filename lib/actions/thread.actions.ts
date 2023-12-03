@@ -37,13 +37,13 @@ export async function createThread({
   }
 }
 
-export async function fetchPosts({ pageNumber = 1, pageSize = 20 }) {
+export async function fetchPosts(pageNumber = 1, pageSize = 30) {
   connectToDB();
 
   // Calculate the number of posts to skip
   const skipAmount = (pageNumber - 1) * pageSize;
   // Fetch the posts that have no parents (top-level threads...)
-  const postQuery = Thread.find({
+  const postsQuery = Thread.find({
     parentId: { $in: [null, undefined] },
   })
     .sort({ createdAt: 'desc' })
@@ -63,7 +63,7 @@ export async function fetchPosts({ pageNumber = 1, pageSize = 20 }) {
     parentId: { $in: [null, undefined] },
   });
 
-  const posts = await postQuery.exec();
+  const posts = await postsQuery.exec();
 
   const isNext = totalPostsCount > skipAmount + posts.length;
   return { posts, isNext };
