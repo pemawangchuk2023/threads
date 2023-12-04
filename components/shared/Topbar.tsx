@@ -1,7 +1,7 @@
-import { OrganizationSwitcher, SignOutButton, SignedIn } from '@clerk/nextjs';
+import { OrganizationSwitcher, SignedIn, SignOutButton } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import { dark } from '@clerk/themes';
 
 function Topbar() {
   return (
@@ -18,7 +18,8 @@ function Topbar() {
         />
         <p className='text-heading3-bold text-light-1 max-xs:hidden'>Threads</p>
       </Link>
-      <div className='items-center gap-1'>
+
+      <div className='flex items-center gap-1'>
         <div className='block md:hidden'>
           <SignedIn>
             <SignOutButton>
@@ -33,9 +34,9 @@ function Topbar() {
             </SignOutButton>
           </SignedIn>
         </div>
+
         <OrganizationSwitcher
           appearance={{
-            baseTheme: dark,
             elements: {
               organizationSwitcherTrigger: 'py-2 px-4',
             },
